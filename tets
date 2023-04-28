@@ -1,0 +1,14 @@
+cd
+ls
+mkdir
+touch
+less
+cat
+vim
+find
+rm (-r) (-rf)
+mv ファイルとか動かす
+cp ファイルとかコピーする
+chmod ファイルに対する権限云々
+ps プロセスを見れる（プロセス：動いてるプログラムと思えば今の所ok）
+
