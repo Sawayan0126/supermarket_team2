@@ -53,7 +53,7 @@ def Buy10(df=df, tax=1.08):
             waribiki_apple = (300-280)*tax*(apple_count//3)       #りんご3個につき20円引き 
             waribiki = max(waribiki_11, waribiki_apple)
         elif cd[i] in (6,7):
-            waribiki_11=waribiki_11 / tax
+            waribiki = waribiki_11 / tax
         elif cd[i] == 8:  #ライターの割引額の高い方を採用
             waribiki_lighter = df.loc[df['product_code']==cd[i],'price'].values[0] * (tobacco_count//10) * tax 
             waribiki = max(waribiki_11, waribiki_lighter)
