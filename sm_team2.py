@@ -48,21 +48,23 @@ def Buy10(df=df, tax=1.08):
             drink_count += n[i]
 
     for i in range(len(cd)):    #割引していくぅ！！
-        waribiki_11 = (n[i] - nn[i]) * df.loc[df['product_code']==cd[i],'price'].values[0] * tax
-        if cd[i] == 1:  #りんごの割引額の高い方を採用
-            waribiki_apple = (300-280)*tax*(apple_count//3)       #りんご3個につき20円引き 
-            waribiki = max(waribiki_11, waribiki_apple)
-        elif cd[i] in (6,7):
-            waribiki = waribiki_11 / tax
-        elif cd[i] == 8:  #ライターの割引額の高い方を採用
-            waribiki_lighter = df.loc[df['product_code']==cd[i],'price'].values[0] * (tobacco_count//10) * tax 
-            waribiki = max(waribiki_11, waribiki_lighter)
-        elif cd[i] in (4,5):  #弁当の割引額の高い方を採用
-            waribiki_bentou = 20*min(bentou_count, drink_count)    #弁当と飲み物の割引
-            waribiki = max(waribiki_11, waribiki_bentou)
-        else:       #他の商品は11個買ったら10個になる割引採用
-            waribiki=waribiki_11
-        sum = sum -waribiki
+        if n[i] > 0:
+            waribiki_11 = (n[i] - nn[i]) * df.loc[df['product_code']==cd[i],'price'].values[0] * tax
+            if cd[i] == 1:  #りんごの割引額の高い方を採用
+                waribiki_apple = (300-280)*tax*(apple_count//3)       #りんご3個につき20円引き 
+                waribiki = max(waribiki_11, waribiki_apple)
+            elif cd[i] in (6,7):
+                waribiki = waribiki_11 / tax
+            elif cd[i] == 8:  #ライターの割引額の高い方を採用
+                waribiki_lighter = df.loc[df['product_code']==cd[i],'price'].values[0] * (tobacco_count//10) * tax 
+                waribiki = max(waribiki_11, waribiki_lighter)
+            elif cd[i] in (4,5):  #弁当の割引額の高い方を採用
+                waribiki_bentou = 20*min(bentou_count, drink_count)    #弁当と飲み物の割引
+                waribiki = max(waribiki_11, waribiki_bentou)
+            else:       #他の商品は11個買ったら10個になる割引採用
+                waribiki=waribiki_11
+            sum = sum -waribiki
+            
     return int(sum)
 
 st.title("商品購入シミュレータ")
